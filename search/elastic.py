@@ -4,15 +4,16 @@ import json
 import warnings
 import time
 from tqdm import tqdm
+import  hashlib
 
 # 忽略 Elasticsearch 警告
 warnings.simplefilter('ignore', category=ElasticsearchWarning)
 # 连接到 Elasticsearch（如果是本地，默认端口是 9200）
 es = Elasticsearch(
     "http://localhost:9200",
-    timeout=30,  # 设置连接超时时间为30秒
-    max_retries=10,  # 最大重试次数
-    retry_on_timeout=True  # 启用超时重试
+    timeout=30,  # 连接超时时间为30秒
+    max_retries=10,  
+    retry_on_timeout=True  # 超时重试
 )
 
 # **1. 创建索引**
@@ -47,41 +48,52 @@ def create_index():
         }
     }
     
-    # 如果索引已存在，删除它
     if es.indices.exists(index=INDEX_NAME):
         es.indices.delete(index=INDEX_NAME)
-    
-    # 创建新的索引
     es.indices.create(index=INDEX_NAME, body=index_config)
     print(f"索引 {INDEX_NAME} 创建成功")
 
-# **2. 上传 JSON 数据**
+
+def generate_id(text):
+    """ 计算SHA-256哈希值，避免ID超长 """
+    return hashlib.sha256(text.encode("utf-8")).hexdigest()
+
+
 def upload_data(json_file):
     with open(json_file, "r", encoding="utf-8") as f:
         poems = json.load(f)
-        
-    actions = [
-        {
-            "_op_type": "index",  # 如果存在则更新
+
+    long_titles = []
+    actions = []
+
+    for poem in poems:
+        poem_id = poem["古诗名"]
+        if len(poem_id.encode("utf-8")) >= 512:
+            long_titles.append(poem)
+            # 用哈希值替代超长ID
+            es_id = generate_id(poem_id)
+        else:
+            es_id = poem_id  # 保持原ID
+
+        actions.append({
+            "_op_type": "index",
             "_index": INDEX_NAME,
-            "_id": poem["古诗名"],  # 使用古诗名作为文档的唯一ID 避免上传重复数据
+            "_id": es_id,  
             "_source": poem
-        }
-        for poem in poems
-        if len(poem["古诗名"].encode("utf-8")) <= 512
-    ]
+        })
     total_len = len(actions)
     failed_documents = []  # 用于存储失败的文档
     failed_file_name = json_file[:-5].split("/")[-1]
     
     record_time = time.strftime("%Y-%m-%d", time.localtime(time.time()))
-    error_file = f"failed_{INDEX_NAME}_{failed_file_name}_{record_time}.json"  # 失败文档的 JSON 文件名
+    error_file = f"failed_{INDEX_NAME}_{failed_file_name}_{record_time}.json"  
     try:
         with tqdm(total=total_len, desc="上传进度", unit="文档") as pbar:
             for success, info in streaming_bulk(es, actions, chunk_size=500):
                 if not success:
                     failed_documents.append(info)
-                pbar.update(1)  # 更新进度条
+                pbar.update(1)  
+
         if failed_documents:
             # 将失败的文档写入 JSON 文件
             with open(error_file, "w", encoding="utf-8") as error_f:
@@ -89,12 +101,17 @@ def upload_data(json_file):
             print(f"上传失败的文档已保存到 {error_file}")
         else:
             print(f"所有文档成功上传,共{total_len}条数据")
+
     except BulkIndexError as e:
         # 将失败的文档信息写入 JSON 文件
         with open(f"failed_record/{error_file}", "w", encoding="utf-8") as error_f:
-            json.dump(e.errors, error_f, ensure_ascii=False, indent=4)
+            json.dump(long_titles, indent=4)
         print(f"上传失败数量{len(e.errors)} 文档已保存到 {error_file} ")
 
+    if len(long_titles) > 0:
+        with open(f"long_titles.json", "w", encoding="utf-8") as f:
+            json.dump(long_titles, f, ensure_ascii=False, indent=4)
+        print(f"有{len(long_titles)}条数据古诗名超长，已存入 long_titles.json备份")
 
 def index_exists():
     return es.indices.exists(index=INDEX_NAME)
@@ -115,13 +132,10 @@ def search_poetry(query):
         "size": 10
     }
     
-    # 执行搜索
+    # 搜索
     response = es.search(index=INDEX_NAME, body=query_body)
     
-    # 输出查询结果
     print(f"==== 搜索 '{query}' 相关的诗词 ====")
-
-
 
     return response['hits']
 # 删除索引
