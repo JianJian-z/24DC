@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html class="wide wow-animation" lang="en">
+  <head>
+    <title>Home</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="icon" href="static/image/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900%7CRoboto+Mono:300,400,500,700">
+    <link rel="stylesheet" href="static/css/bootstrap.css">
+    <link rel="stylesheet" href="static/css/fonts.css">
+    <link rel="stylesheet" href="static/css/style.css">
+    <style>.ie-panel{display: none;background: #212121;padding: 10px 0;box-shadow: 3px 3px 5px 0 rgba(0,0,0,.3);clear: both;text-align:center;position: relative;z-index: 1;} html.ie-10 .ie-panel, html.lt-ie-10 .ie-panel {display: block;}</style>
+  </head>
+  <body>
+    <div class="ie-panel"><a href="http://windows.microsoft.com/en-US/internet-explorer/"><img src="static/image/warning_bar_0000_us.jpg" height="42" width="820" alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today."></a></div>
+    <div class="preloader">
+      <div class="preloader-body">
+        <div class="cssload-container">
+          <div class="cssload-speeding-wheel"></div>
+        </div>
+        <p>Loading...</p>
+      </div>
+    </div>
+    <div class="page">
+      <!-- Page Header-->
+      <header class="section page-header">
+        <!-- RD Navbar-->
+        <div class="rd-navbar-wrap">
+          <nav class="rd-navbar rd-navbar-wide" data-layout="rd-navbar-fixed" data-sm-layout="rd-navbar-fixed" data-md-layout="rd-navbar-fixed" data-md-device-layout="rd-navbar-fixed" data-lg-layout="rd-navbar-static" data-lg-device-layout="rd-navbar-static" data-xl-layout="rd-navbar-static" data-xl-device-layout="rd-navbar-static" data-lg-stick-up-offset="46px" data-xl-stick-up-offset="46px" data-xxl-stick-up-offset="46px" data-lg-stick-up="true" data-xl-stick-up="true" data-xxl-stick-up="true">
+            <div class="rd-navbar-main-outer">
+              <div class="rd-navbar-main">
+                <!-- RD Navbar Panel-->
+                <div class="rd-navbar-panel">
+                  <!-- RD Navbar Toggle-->
+                  <button class="rd-navbar-toggle" data-rd-navbar-toggle=".rd-navbar-nav-wrap"><span></span></button>
+                  <!-- RD Navbar Brand-->
+                  <div class="rd-navbar-brand"><a class="brand" href="index.html"><img class="brand-logo-dark" src="static/image/logo.png" alt="" width="174" height="48" srcset="static/image/logo.png 2x"/><img class="brand-logo-light" src="static/image/logo.png" alt="" width="174" height="48" srcset="static/image/logo.png 2x"/></a>
+                  </div>
+                </div>
+                <div class="rd-navbar-nav-wrap">
+                  <!-- RD Navbar Nav-->
+                  <ul class="rd-navbar-nav">
+                    <li class="rd-nav-item"><a class="rd-nav-link" href="#">Trace</a>
+                      <!-- RD Navbar Dropdown-->
+                      <ul class="rd-menu rd-navbar-dropdown">
+                        <li class="rd-dropdown-item">
+                            <a class="rd-dropdown-link" href="{{ url_for('traditional_trace') }}">TraditionalTrace</a>
+                        </li>
+                        <li class="rd-dropdown-item">
+                            <a class="rd-dropdown-link" href="{{ url_for('llm_trace') }}">LLMTrace</a>
+                        </li>
+                    </ul>
+                    </li>
+                    <li class="rd-nav-item"><a class="rd-nav-link" href="#">Pages</a>
+                      <!-- RD Navbar Megamenu-->
+                      <ul class="rd-menu rd-navbar-megamenu">
+                        <li class="rd-megamenu-item">
+                          <div class="rd-megamenu-title">Pages</div>
+                          <div class="rd-megamenu-block">
+                            <ul class="rd-megamenu-list">
+                              <li class="rd-megamenu-list-item"><a class="rd-megamenu-list-link" href="privacy-policy.html">Privacy policy</a></li>
+                            </ul>
+                          </div>
+                        </li>
+                      </ul>
+                    </li>
+                    <li class="rd-nav-item"><a class="rd-nav-link" href="contacts.html">Contacts</a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </nav>
+        </div>
+      </header>
+      <!-- Preview section-->
+      <section class="section context-dark bg-image bg-mask bg-mask-2 section-fullheight section-90vh" style="background-image: url(static/image/background.png)">
+        <div class="section-fullheight-inner section-md main-section">
+          <div class="container">
+            <div class="row">
+              <div class="col-md-6 col-lg-5 text-center text-md-left">
+                <div class="jumbotron-custom wow fadeInLeft">
+                  <div class="title">古诗今用</div>
+                  <h5 class="subtitle">for ancient chinese poems and idioms lover and researcher</h5>
+                  <p class="text">OPUN is a LLM based website that invokes interest and love for chinese poem and idiom.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- Page Footer-->
+      <div class="pre-footer-classic context-dark">
+        <div class="container">
+          <div class="row row-60 justify-content-lg-between text-center text-sm-left">
+            <div class="col-sm-6 col-lg-3 col-xl-3">
+              <h6 class="font-weight-medium text-uppercase">About us</h6>
+              <p>OPUN is a LLM based website aims to invoke interest and love for chinese ancient poems and idioms.</p>
+            </div>
+            <div class="col-sm-6 col-lg-4 col-xl-3">
+              <h6 class="font-weight-medium text-uppercase">Contacts</h6>
+              <dl class="list-terms-custom">
+                <dt><span class="icon mdi mdi-phone"></span></dt>
+                <dd><a class="link-default" href="tel:#">17701058070</a></dd>
+              </dl>
+              <dl class="list-terms-custom">
+                <dt><span class="icon mdi mdi-email"></span></dt>
+                <dd><a class="link-default" href="mailto:#">bz1375191373@163.com</a></dd>
+              </dl>
+            </div>
+            <div class="col-lg-4">
+              <h6 class="font-weight-medium text-uppercase">Newsletter</h6>
+              <form class="rd-form rd-mailform rd-mailform-custom" data-form-output="form-output-global" data-form-type="contact" method="post" action="bat/rd-mailform.php">
+                <div class="form-wrap form-wrap-icon">
+                  <div class="form-icon mdi mdi-email-outline"></div>
+                  <input class="form-input" id="footer-email" type="email" name="email" data-constraints="@Email @Required">
+                  <label class="form-label" for="footer-email">E-mail</label>
+                </div>
+                <div class="button-wrap text-center text-sm-left">
+                  <button class="button button-default" type="submit">subscribe</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+      <footer class="section footer-classic context-dark text-center">
+        <div class="container">
+          <div class="row row-15 justify-content-lg-between">
+            <div class="col-lg-4 col-xl-3 text-lg-left">
+              <p class="rights"><span>&copy;&nbsp; </span><span class="copyright-year"></span><span>&nbsp;</span><span>OPUN</span><span>.&nbsp;</span><span>All Rights reserved</span></p>
+            </div>
+          </div>
+        </div>
+      </footer>
+    </div>
+    <div class="snackbars" id="form-output-global"></div>
+    <script src="static/js/core.min.js"></script>
+    <script src="static/js/script.js"></script>
+  </body>
+</html>

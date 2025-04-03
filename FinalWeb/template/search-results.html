@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html class="wide wow-animation" lang="en">
+  <head>
+    <title>Search Results</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="icon" href="static/image/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900%7CRoboto+Mono:300,400,500,700">
+    <link rel="stylesheet" href="static/css/bootstrap.css">
+    <link rel="stylesheet" href="static/css/fonts.css">
+    <link rel="stylesheet" href="static/css/style.css">
+    <style>.ie-panel{display: none;background: #212121;padding: 10px 0;box-shadow: 3px 3px 5px 0 rgba(0,0,0,.3);clear: both;text-align:center;position: relative;z-index: 1;} html.ie-10 .ie-panel, html.lt-ie-10 .ie-panel {display: block;}</style>
+  </head>
+  <body>
+    <div class="ie-panel"><a href="http://windows.microsoft.com/en-US/internet-explorer/"><img src="static/image/warning_bar_0000_us.jpg" height="42" width="820" alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today."></a></div>
+    <div class="preloader">
+      <div class="preloader-body">
+        <div class="cssload-container">
+          <div class="cssload-speeding-wheel"></div>
+        </div>
+        <p>Loading...</p>
+      </div>
+    </div>
+    <div class="page">
+      <!-- Page Header-->
+      <header class="section page-header">
+        <!-- RD Navbar-->
+        <div class="rd-navbar-wrap">
+          <nav class="rd-navbar rd-navbar-wide" data-layout="rd-navbar-fixed" data-sm-layout="rd-navbar-fixed" data-md-layout="rd-navbar-fixed" data-md-device-layout="rd-navbar-fixed" data-lg-layout="rd-navbar-static" data-lg-device-layout="rd-navbar-static" data-xl-layout="rd-navbar-static" data-xl-device-layout="rd-navbar-static" data-lg-stick-up-offset="46px" data-xl-stick-up-offset="46px" data-xxl-stick-up-offset="46px" data-lg-stick-up="true" data-xl-stick-up="true" data-xxl-stick-up="true">
+            <div class="rd-navbar-main-outer">
+              <div class="rd-navbar-main">
+                <!-- RD Navbar Panel-->
+                <div class="rd-navbar-panel">
+                  <!-- RD Navbar Toggle-->
+                  <button class="rd-navbar-toggle" data-rd-navbar-toggle=".rd-navbar-nav-wrap"><span></span></button>
+                  <!-- RD Navbar Brand-->
+                  <div class="rd-navbar-brand"><a class="brand" href="index.html"><img class="brand-logo-dark" src="images/logo-default-174x48.png" alt="" width="174" height="48" srcset="images/logo-default-348x96.png 2x"/><img class="brand-logo-light" src="images/logo-default-174x48.png" alt="" width="174" height="48" srcset="images/logo-default-348x96.png 2x"/></a>
+                  </div>
+                </div>
+                <div class="rd-navbar-nav-wrap">
+      </header>
+      <section class="breadcrumbs-custom bg-image context-dark" style="background-image: url(images/breadcrumbs-bg-1.jpg);">
+        <div class="container">
+          <div class="breadcrumbs-custom-title">Search Results</div>
+        </div>
+      </section>
+      <!-- Search results-->
+      <section class="section-md bg-gray-700">
+        <div class="container">
+          <div class="row justify-content-center">
+            <div class="col-lg-9">
+              <!-- RD Search-->
+              <form class="rd-form rd-search rd-form-inline rd-search-form-2" action="search-results.html" method="GET">
+                <div class="form-wrap">
+                  <label class="form-label" for="rd-search-form-input">Search</label>
+                  <input class="form-input" id="rd-search-form-input" type="text" name="s" autocomplete="off">
+                </div>
+                <div class="form-button">
+                  <button class="button button-default button-right" type="submit">Search</button>
+                </div>
+              </form>
+              <div class="rd-search-results">
+                {% if search_performed %}
+                  <div class="search-summary">
+                    <p>Search results for '<strong>{{ query }}</strong>' ({{ search_time }}s)</p>
+                  </div>
+                  {% if has_results %}
+                    <div class="search-results-list">
+                      {% for hit in results %}
+                      <div class="search-result-item">
+                        <h4 class="result-title">{{ hit._source.古诗名 }}</h4>
+                        <p class="result-meta">
+                          <span class="author">{{ hit._source.作者 }}</span>
+                          <span class="dynasty">({{ hit._source.朝代 }})</span>
+                        </p>
+                        <div class="result-content">
+                          {% if 'highlight' in hit and '内容' in hit.highlight %}
+                            {{ hit.highlight.内容[0]|safe }}
+                          {% else %}
+                            {{ hit._source.内容 }}
+                          {% endif %}
+                        </div>
+                      </div>
+                      {% endfor %}
+                    </div>
+                  {% else %}
+                    <div class="no-results">
+                      <p>{{ no_results_message }}</p>
+                    </div>
+                  {% endif %}
+                {% endif %}
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- Page Footer-->
+      <footer class="section footer-classic context-dark text-center">
+        <div class="container">
+          <div class="row row-15 justify-content-lg-between">
+            <div class="col-lg-4 col-xl-3 text-lg-left">
+              <p class="rights"><span>&copy;&nbsp; </span><span class="copyright-year"></span><span>&nbsp;</span><span>OPUN</span><span>.&nbsp;</span><span>All Rights reserved</span></p>
+            </div>
+          </div>
+        </div>
+      </footer>
+    </div>
+    <div class="snackbars" id="form-output-global"></div>
+    <script src="static/js/core.min.js"></script>
+    <script src="static/js/script.js"></script>
+  </body>
+</html>
