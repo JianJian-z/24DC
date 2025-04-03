@@ -4,29 +4,70 @@ Date         : 2025-03-31 14:19:08
 LastEditTime : 2025-04-03 16:09:22
 '''
 from flask import Flask, render_template, request, redirect, url_for, jsonify 
-from elasticsearch import Elasticsearch, ElasticsearchWarning
+
 import warnings
 import time
 import requests
 from dotenv import load_dotenv
 import os
 import json
+from search.elastic import Esearch
+
+import subprocess
+import time
+import shlex  # 处理命令拆分（Unix-like 系统需要）
+
+def start_elasticsearch():
+    try:
+        # 根据系统选择命令
+        command = "elasticsearch"  # 通用命令（依赖 PATH 环境变量）
+
+        # 启动进程（关键：shell=True 让系统解析 PATH）
+        process = subprocess.Popen(
+            command,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            shell=True,            # 依赖 shell 解析 PATH 环境变量
+            text=True
+        )
+
+        print("正在启动 Elasticsearch...")
+        # 实时读取输出并检测启动成功标志
+        while True:
+            output = process.stdout.readline()
+            if output == '' and process.poll() is not None:
+                break
+            if output:
+                print(output.strip())
+                if "started" in output.lower():
+                    print("✅ Elasticsearch 启动成功！")
+                    break
+        return process
+
+    except FileNotFoundError:
+        print("错误：找不到 'elasticsearch' 命令。请确保：")
+        print("1. Elasticsearch 的 bin 目录已添加到系统 PATH 环境变量")
+        print("2. 重启终端或IDE使环境变量生效")
+    except Exception as e:
+        print(f"启动失败: {str(e)}")
+
 
 app = Flask(__name__, template_folder='template', static_folder='static')
 
 # 忽略 Elasticsearch 警告
-warnings.simplefilter('ignore', category=ElasticsearchWarning)
 
-# 配置Elasticsearch连接
-es = Elasticsearch(
-    "http://localhost:9200",
-    timeout=30,
-    max_retries=10,
-    retry_on_timeout=True
-)
-
-# 索引名称
 INDEX_NAME = "poetry_index"
+# 配置Elasticsearch连接
+es = Esearch(host="http://localhost:9200",
+             index_name=INDEX_NAME)
+
+# Elasticsearch(
+#     "http://localhost:9200",
+#     timeout=30,
+#     max_retries=10,
+#     retry_on_timeout=True
+# )
+es.create_index()  
 
 @app.route('/')
 def home():
@@ -169,24 +210,19 @@ def search_results():
 
 def perform_search(query):
     """执行Elasticsearch搜索"""
-    if not es.indices.exists(index=INDEX_NAME):
+    if not es.index_exists() :
+        print(f"索引 '{INDEX_NAME}' 未创建该索引")
         return None
-    query_body = {
-        "query": {
-            "match": {
-                "内容": query  # 进行内容字段的模糊匹配
-            }
-        },
-        "size": 10
-    }
-    
     try:
-        res = es.search(index=INDEX_NAME, body=query_body)['hits']['hits']
-        print(res)
+        res = es.search_poetry(query)
         return res
     except Exception as e:
         print(f"搜索出错: {e}")
         return None
 
+
+
 if __name__ == '__main__':
+    start_elasticsearch()
     app.run(debug=True, port=5000)
+    # * Running on http://127.0.0.1:5000
