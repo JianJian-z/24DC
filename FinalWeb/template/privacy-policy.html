@@ -5,15 +5,15 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <link rel="icon" href="images/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="static/image/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900%7CRoboto+Mono:300,400,500,700">
-    <link rel="stylesheet" href="css/bootstrap.css">
-    <link rel="stylesheet" href="css/fonts.css">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="static/css/bootstrap.css">
+    <link rel="stylesheet" href="static/css/fonts.css">
+    <link rel="stylesheet" href="static/css/style.css">
     <style>.ie-panel{display: none;background: #212121;padding: 10px 0;box-shadow: 3px 3px 5px 0 rgba(0,0,0,.3);clear: both;text-align:center;position: relative;z-index: 1;} html.ie-10 .ie-panel, html.lt-ie-10 .ie-panel {display: block;}</style>
   </head>
   <body>
-    <div class="ie-panel"><a href="http://windows.microsoft.com/en-US/internet-explorer/"><img src="images/ie8-panel/warning_bar_0000_us.jpg" height="42" width="820" alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today."></a></div>
+    <div class="ie-panel"><a href="http://windows.microsoft.com/en-US/internet-explorer/"><img src="static/image/ie8-panel/warning_bar_0000_us.jpg" height="42" width="820" alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today."></a></div>
     <div class="preloader">
       <div class="preloader-body">
         <div class="cssload-container">
@@ -35,70 +35,15 @@
                   <!-- RD Navbar Toggle-->
                   <button class="rd-navbar-toggle" data-rd-navbar-toggle=".rd-navbar-nav-wrap"><span></span></button>
                   <!-- RD Navbar Brand-->
-                  <div class="rd-navbar-brand"><a class="brand" href="index.html"><img class="brand-logo-dark" src="images/logo-default-174x48.png" alt="" width="174" height="48" srcset="images/logo-default-348x96.png 2x"/><img class="brand-logo-light" src="images/logo-default-174x48.png" alt="" width="174" height="48" srcset="images/logo-default-348x96.png 2x"/></a>
+                  <div class="rd-navbar-brand"><a class="brand" href="{{ url_for('home') }}"><img class="brand-logo-dark" src="static/image/logo.png" alt="" width="174" height="48" srcset="static/image/logo.png 2x"/><img class="brand-logo-light" src="static/image/logo.png" alt="" width="174" height="48" srcset="static/image/logo.png 2x"/></a>
                   </div>
-                </div>
-                <div class="rd-navbar-nav-wrap">
-                  <!-- RD Navbar Nav-->
-                  <ul class="rd-navbar-nav">
-                    <li class="rd-nav-item"><a class="rd-nav-link" href="#">Search</a>
-                      <!-- RD Navbar Dropdown-->
-                      <ul class="rd-menu rd-navbar-dropdown">
-                        <li class="rd-dropdown-item"><a class="rd-dropdown-link" href="TraditionnalSearch.html">Scripts</a></li>
-                        <li class="rd-dropdown-item"><a class="rd-dropdown-link" href="LLMSearch.html">Scripts 2</a></li>
-                        <!-- <li class="rd-dropdown-item"><a class="rd-dropdown-link" href="script-page.html">Script page</a></li> -->
-                      </ul>
-                    </li>
-                    <!-- <li class="rd-nav-item"><a class="rd-nav-link" href="categories.html">Categories</a>
-                    </li>
-                    <li class="rd-nav-item"><a class="rd-nav-link" href="development.html">Development</a> -->
-                    </li>
-                    <li class="rd-nav-item active"><a class="rd-nav-link" href="#">Pages</a>
-                      <!-- RD Navbar Megamenu-->
-                      <ul class="rd-menu rd-navbar-megamenu">
-                        <!-- <li class="rd-megamenu-item">
-                          <div class="rd-megamenu-title">Elements</div>
-                          <div class="rd-megamenu-block">
-                            <ul class="rd-megamenu-list">
-                              <li class="rd-megamenu-list-item"><a class="rd-megamenu-list-link" href="typography.html">Typography</a></li>
-                              <li class="rd-megamenu-list-item"><a class="rd-megamenu-list-link" href="buttons.html">Buttons</a></li>
-                              <li class="rd-megamenu-list-item"><a class="rd-megamenu-list-link" href="forms.html">Forms</a></li>
-                            </ul>
-                            <ul class="rd-megamenu-list">
-                              <li class="rd-megamenu-list-item"><a class="rd-megamenu-list-link" href="counters.html">Counters</a></li>
-                              <li class="rd-megamenu-list-item"><a class="rd-megamenu-list-link" href="icon-lists.html">Icon lists</a></li>
-                              <li class="rd-megamenu-list-item"><a class="rd-megamenu-list-link" href="search-results.html">Search results</a></li>
-                            </ul>
-                          </div>
-                        </li> -->
-                        <li class="rd-megamenu-item">
-                          <div class="rd-megamenu-title">Pages</div>
-                          <div class="rd-megamenu-block">
-                            <ul class="rd-megamenu-list">
-                              <!-- <li class="rd-megamenu-list-item"><a class="rd-megamenu-list-link" href="team.html">Team</a></li>
-                              <li class="rd-megamenu-list-item"><a class="rd-megamenu-list-link" href="404.html">404</a></li>
-                              <li class="rd-megamenu-list-item"><a class="rd-megamenu-list-link" href="coming-soon.html">Coming soon</a></li> -->
-                              <li class="rd-megamenu-list-item"><a class="rd-megamenu-list-link" href="privacy-policy.html">Privacy policy</a></li>
-                            </ul>
-                            <!-- <ul class="rd-megamenu-list">
-                              <li class="rd-megamenu-list-item"><a class="rd-megamenu-list-link" href="blog.html">Blog</a></li>
-                              <li class="rd-megamenu-list-item"><a class="rd-megamenu-list-link" href="blog-post.html">Blog post</a></li>
-                              <li class="rd-megamenu-list-item"><a class="rd-megamenu-list-link" href="about-us.html">About us</a></li>
-                            </ul> -->
-                          </div>
-                        </li>
-                      </ul>
-                    </li>
-                    <li class="rd-nav-item"><a class="rd-nav-link" href="contacts.html">Contacts</a>
-                    </li>
-                  </ul>
                 </div>
               </div>
             </div>
           </nav>
         </div>
       </header>
-      <section class="breadcrumbs-custom bg-image context-dark" style="background-image: url(images/breadcrumbs-bg-1.jpg);">
+      <section class="breadcrumbs-custom bg-image context-dark" style="background-image: url(static/image/breadcrumbs-bg-1.jpg);">
         <div class="container">
           <div class="breadcrumbs-custom-title">Privacy Policy</div>
           <div class="breadcrumbs-custom-subtitle">Take a look at our latest projects</div>
@@ -122,7 +67,7 @@
             <dd class="text-color-1">Our web site uses the data we collect for three basic purposes: to operate our business and provide (including improving and personalizing) the services we offer, to send communications, including promotional communications, and to display advertising. In carrying out these purposes, we combine data we collect through the various web site services you use to give you a more seamless, consistent and personalized experience. However, to enhance privacy, we have built in technological and procedural safeguards designed to prevent certain data combinations. For example, we store data we collect from you when you are unauthenticated (not signed in) separately from any account information that directly identifies you, such as your name, email address or phone number.</dd>
             <dt class="heading-5">Sharing Your Information</dt>
             <dd class="text-color-1">We share your personal data with your consent or as necessary to complete any transaction or provide any service you have requested or authorized. For example, we share your content with third parties when you tell us to do so. When you provide payment data to make a purchase, we will share payment data with banks and other entities that process payment transactions or provide other financial services, and for fraud prevention and credit risk reduction. In addition, we share personal data among our controlled affiliates and subsidiaries. We also share personal data with vendors or agents working on our behalf for the purposes described in this statement. For example, companies we've hired to provide customer service support or assist in protecting and securing our systems and services may need access to personal data in order to provide those functions. In such cases, these companies must abide by our data privacy and security requirements and are not allowed to use personal data they receive from us for any other purpose. We may also disclose personal data as part of a corporate transaction such as a merger or sale of assets.</dd>
-          </dl><a class="privacy-link link-secondary" href="mailto:#">privacy@demolink.org</a>
+          </dl>
         </div>
       </section>
       <!-- Page Footer-->
@@ -172,21 +117,12 @@
             <div class="col-lg-4 col-xl-3 text-lg-left">
               <p class="rights"><span>&copy;&nbsp; </span><span class="copyright-year"></span><span>&nbsp;</span><span>JSPlace</span><span>.&nbsp;</span><span>All Rights reserved</span></p>
             </div>
-            <div class="col-lg-5 col-xl-6">
-              <ul class="list-inline list-inline-lg list-inline-custom text-uppercase">
-                <li class="font-weight-bold"><a href="about-us.html">About us</a></li>
-                <li class="font-weight-bold"><a href="scripts.html">Scripts</a></li>
-                <li class="font-weight-bold"><a href="blog.html">Blog</a></li>
-              </ul>
-            </div>
-            <div class="col-lg-3 text-lg-right"><a href="privacy-policy.html">Privacy Policy</a> <a target="_blank" href="https://www.mobanwang.com/" title="网站模板">网站模板</a></div>
           </div>
         </div>
       </footer>
     </div>
     <div class="snackbars" id="form-output-global"></div>
-    <script src="js/core.min.js"></script>
-    <script src="js/script.js"></script>
-    <!-- coded by Starlight-->
+    <script src="static/js/core.min.js"></script>
+    <script src="static/js/script.js"></script>
   </body>
 </html>
