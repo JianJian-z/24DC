@@ -5,18 +5,17 @@ import torch
 ROOT_DIR = Path(__file__).parent.absolute()
 
 # 数据目录
-DATA_DIR = os.path.join(ROOT_DIR, "data")
-POETRY_DATA_PATH = os.path.join(DATA_DIR, "poem.json")
-IDIOM_DATA_PATH = os.path.join(DATA_DIR, "chengyu.json")
+DATA_DIR =r'datas'
+POETRY_DATA_PATH = r'datas\result3.json'
+IDIOM_DATA_PATH = r'datas\chengyu.json'
 
 # 索引目录
-INDEX_DIR = os.path.join(ROOT_DIR, "index")
+INDEX_DIR = r'rag_recommand\index'
 POETRY_INDEX_PATH = os.path.join(INDEX_DIR, "poetry_index")
 IDIOM_INDEX_PATH = os.path.join(INDEX_DIR, "idiom_index")
 
 # 日志目录
-LOG_DIR = os.path.join(ROOT_DIR, "logs")
-
+LOG_DIR =r'rag_recommand\logs'
 # 模型配置
 MODEL_NAME = "BAAI/bge-large-zh-v1.5"
 DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
