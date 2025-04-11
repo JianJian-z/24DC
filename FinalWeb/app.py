@@ -11,6 +11,15 @@ import requests
 from dotenv import load_dotenv
 import os
 import json
+import sys
+
+# 添加包含rag_recommand.py文件的直接路径
+# 获取模块的绝对路径
+module_path = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "rag_recommand")
+sys.path.append(module_path)
+
+# 导入模块
+import rag_recommand
 
 app = Flask(__name__, template_folder='template', static_folder='static')
 
@@ -89,7 +98,10 @@ def deepseek_query():
             ],
             "analysis": "文本中检测到2处古诗化用"
         }}"""
-
+        recommendations=str(rag_recommand.query_rag_system(data['question'], top_k=5))
+        print(recommendations)
+        detection_prompt=detection_prompt+f"以下是诗句和成语的化用参考：{recommendations}"
+        
         # 构造 DeepSeek 请求
         headers = {
             "Authorization": f"Bearer {DEEPSEEK_API_KEY}",
